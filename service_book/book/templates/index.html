@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+  <h1>Tabulka záznamů</h1>
+
+  <form method="get">
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <label for="filter_car">Auto:</label>
+        <select id="filter_car" name="car" class="form-control">
+          <option value="">Všechny</option>
+          {% for car in cars %}
+            <option value="{{ car.id }}">{{ car.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="filter_person">Člověk:</label>
+        <select id="filter_person" name="person" class="form-control">
+          <option value="">Všichni</option>
+          {% for person in persons %}
+            <option value="{{ person.id }}">{{ person.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="filter_section">Sekce:</label>
+        <select id="filter_section" name="section" class="form-control">
+          <option value="">Všechny</option>
+          {% for section in sections %}
+            <option value="{{ section.id }}">{{ section.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="filter_time_from">Datum od-do:</label>
+        <div class="row">
+          <div class="col">
+            <input type="date" id="filter_time_from" name="time_from" class="form-control" placeholder="From Date">
+          </div>
+          <div class="col">
+            <input type="date" id="filter_time_to" name="time_to" class="form-control" placeholder="To Date">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-3">
+        <button type="submit" class="btn btn-primary">Filtrovat</button>
+      </div>
+    </div>
+  </form>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Auto</th>
+        <th>Osoba</th>
+        <th>Sekce</th>
+        <th>Datum a čas</th>
+        <th>Poznámka</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for record in records %}
+        <tr>
+          <td>{{ record.car.name }}</td>
+          <td>{{ record.person.name }}</td>
+          <td>{{ record.section.name }}</td>
+          <td>{{ record.datetime|date:"d.m.Y H:i" }}</td>
+          <td>{{ record.text }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha2/js/bootstrap.bundle.min.js"></script>
+{% endblock %}

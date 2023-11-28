@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2 class="mt-4 mb-4">Create a New Record</h2>
+    <form method="post" class="col-md-8">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="{{ form.person.id_for_label }}" class="form-label">Osoba</label>
+            {{ form.person }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.section.id_for_label }}" class="form-label">Sekce</label>
+            {{ form.section }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.car.id_for_label }}" class="form-label">Auto</label>
+            {{ form.car }}
+        </div>
+        <div class="mb-3">
+            <label for="{{ form.text.id_for_label }}" class="form-label">Popisek</label>
+            {{ form.text }}
+        </div>
+        <button type="submit" class="btn btn-primary">Vytvořit záznam</button>
+    </form>
+</div>
+{% endblock %}
